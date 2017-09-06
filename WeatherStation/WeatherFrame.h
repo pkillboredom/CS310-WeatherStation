@@ -6,48 +6,49 @@ namespace WeatherStation::Structs {
 	typedef struct WeatherFrame
 	{
 		//Expressed in Celcius
-		float Temperature;
+		WeatherParam<float> *Temperature;
 		//Expressed in Celcius
-		float FeelsLikeTemperature;
+		WeatherParam<float> *FeelsLikeTemperature;
 		//Expressed in Celcius
-		float HeatIndex;
+		WeatherParam<float> *HeatIndex;
 		//Expressed in Celcius
-		float DewPoint;
+		WeatherParam<float> *DewPoint;
 
 
 		//Expressed in KMpH
-		float WindSpeed;
+		WeatherParam<float> *WindSpeed;
+
 		//Expressed in KMpH
-		float WindGust;
+		WeatherParam<float> *WindGust;
 
 		//Expressed in enum WindDirections
-		WindDirections WindDirection;
+		WeatherParam<WindDirections> *WindDirection;
 
 		//Expressed in KM
-		float Visibility;
+		WeatherParam<float> *Visibility;
 
 		//Expressed in percents
-		Percentage Humidity;
+		WeatherParam<Percentage> *Humidity;
 
 		//Expressed in hPa
-		unsigned int Pressure;
+		WeatherParam<unsigned int> *Pressure;
 
-		WeatherFrame() : Temperature(0.0), FeelsLikeTemperature(0.0), HeatIndex(0.0), DewPoint(0.0),
-			WindSpeed(0.0), WindGust(0.0), WindDirection(N), Visibility(0.0), Pressure(0.0) {}
+		WeatherFrame() : Temperature(), FeelsLikeTemperature(), HeatIndex(), DewPoint(),
+			WindSpeed(), WindGust(), WindDirection(), Visibility(), Pressure() {}
 
 		WeatherFrame(float _temperature, float _feelsLikeTemperature, float _heatIndex, float _dewPoint,
 			float _windSpeed, float _windGust, WindDirections _windDirection, float _visibiity,
 			Percentage _humidity, unsigned int _pressure) {
-			Temperature = _temperature;
-			FeelsLikeTemperature = _feelsLikeTemperature;
-			HeatIndex = _heatIndex;
-			DewPoint = _dewPoint;
-			WindSpeed = _windSpeed;
-			WindGust = _windGust;
-			WindDirection = _windDirection;
-			Visibility = _visibiity;
-			Humidity = _humidity;
-			Pressure = _pressure;
+			Temperature = new WeatherParam<float>(_temperature);
+			FeelsLikeTemperature = new WeatherParam<float>(_feelsLikeTemperature);
+			HeatIndex = new WeatherParam<float>(_heatIndex);
+			DewPoint = new WeatherParam<float>(_dewPoint);
+			WindSpeed = new WeatherParam<float>(_windSpeed);
+			WindGust = new WeatherParam<float>(_windGust);
+			WindDirection = new WeatherParam<WindDirections>(_windDirection);
+			Visibility = new WeatherParam<float>(_visibiity);
+			Humidity = new WeatherParam<Percentage>(_humidity);
+			Pressure = new WeatherParam<unsigned int>(_pressure);
 		}
 	};
 
@@ -68,5 +69,22 @@ namespace WeatherStation::Structs {
 		WNW,
 		NW,
 		NNW
+	};
+
+	template <typename t>
+	typedef struct WeatherParam {
+		t value;
+		bool isAvailiable;
+		WeatherParam() {
+			isAvailiable = false;
+		}
+		WeatherParam(t _value) {
+			value = _value;
+			isAvailiable = true;
+		}
+		WeatherParam(t _value, bool _isAvailiable) {
+			value = _value;
+			isAvailiable = _isAvailiable;
+		}
 	};
 }
