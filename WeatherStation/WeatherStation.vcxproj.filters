@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Structs">
+      <UniqueIdentifier>{a5d70cec-d6d1-4be9-808b-ecb754cafca9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Structs">
+      <UniqueIdentifier>{9bbea099-5c6e-49eb-9f1a-4489646e852e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -24,12 +30,33 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Percentage.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="WeatherFrame.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="WeatherFrameResponse.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="ManualFrameEntryModule.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="WindDirections.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="inputValidatorResponse.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WeatherStation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ManualFrameEntryModule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
