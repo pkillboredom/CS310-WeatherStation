@@ -172,27 +172,14 @@ namespace WeatherStation {
 		///take in std::strings so that the professor cant throw exceptions on bad inputs
 		std::string s_name;
 		std::string s_temperature;
-		//std::string s_feelsLikeTemperature;
-		//std::string s_heatIndex;
-		//std::string s_dewPoint;
 		std::string s_windSpeed;
 		std::string s_windDirection;
-		//std::string s_visibiity;
-		//std::string s_humidity;
-		//std::string s_pressure;
 
 		///input handlers convert to correct types
 		WeatherParam<std::string> f_name;
 		WeatherParam<float> f_temperature;
-		//WeatherParam<float> f_feelsLikeTemperature;
-		//WeatherParam<float> f_heatIndex;
-		//WeatherParam<float> f_dewPoint;
 		WeatherParam<float> f_windSpeed;
-		//WeatherParam<float> f_windGust;
 		WeatherParam<WindDirections> f_windDirection;
-		//WeatherParam<float> f_visibility;
-		//WeatherParam<Percentage> f_humidity;
-		//WeatherParam<int> f_pressure;
 
 		//Strings for the unit displays. Eventually these will be governed by options.
 		std::string tempUnit = "deg C";
@@ -279,59 +266,6 @@ namespace WeatherStation {
 			}
 		}
 
-		/*std::cout << "Input the Feels Like Temperature in Degrees Celcius: ";
-		std::getline(std::cin, temp);
-		inputValidatorResponse<float> responseb = floatInputHandler(temp, "Feels Like Temperature");
-		if (responseb.isQuit) {
-			return WeatherFrameResponse(true, false);
-		}
-		else if (responseb.isValid == 0) {
-			f_feelsLikeTemperature = WeatherParam<float>("Feels Like Temperature");
-		}
-		else if (responseb.isValid == 2) {
-			std::cout << "Your input was not understood. Setting as unavailiable." << std::endl;
-			f_feelsLikeTemperature = WeatherParam<float>("Feels Like Temperature");
-		}
-		else {
-			f_feelsLikeTemperature = responseb.value;
-		}*/
-
-		/*std::cout << "Input the Heat Index in Degrees Celcius: ";
-		
-		std::getline(std::cin, temp);
-		inputValidatorResponse<float> responsec = floatInputHandler(temp, "Heat Index");
-		if (responsec.isQuit) {
-			return WeatherFrameResponse(true, false);
-		}
-		else if (responsec.isValid == 0) {
-			f_heatIndex = WeatherParam<float>("Heat Index");
-		}
-		else if (responsec.isValid == 2) {
-			std::cout << "Your input was not understood. Setting as unavailiable." << std::endl;
-			f_heatIndex = WeatherParam<float>("Heat Index");
-		}
-		else {
-			f_heatIndex = responsec.value;
-		}*/
-
-		/*std::cout << "Input the Dew Point in Degrees Celcius: ";
-		
-		std::getline(std::cin, temp);
-		inputValidatorResponse<float> responsed = floatInputHandler(temp, "Dew Point");
-		if (responsed.isQuit) {
-			return WeatherFrameResponse(true, false);
-		}
-		else if (responsed.isValid == 0) {
-			f_dewPoint = WeatherParam<float>("Dew Point");
-		}
-		else if (responsed.isValid == 2) {
-			std::cout << "Your input was not understood. Setting as unavailiable." << std::endl;
-			f_dewPoint = WeatherParam<float>("Dew Point");
-		}
-		else {
-			f_dewPoint = responsed.value;
-		}*/
-
 		undef_flag = true;
 
 		while (undef_flag) {
@@ -368,24 +302,6 @@ namespace WeatherStation {
 				f_windSpeed = responsee.value;
 			}
 		}
-
-		/*std::cout << "Input the Wind Gust in KMpH: ";
-		
-		std::getline(std::cin, temp);
-		inputValidatorResponse<float> responsef = floatInputHandler(temp, "Wind Gust");
-		if (responsef.isQuit) {
-			return WeatherFrameResponse(true, false);
-		}
-		else if (responsef.isValid == 0) {
-			f_windGust = WeatherParam<float>("Wind Gust");
-		}
-		else if (responsef.isValid == 2) {
-			std::cout << "Your input was not understood. Setting as unavailiable." << std::endl;
-			f_windGust = WeatherParam<float>("Wind Gust");
-		}
-		else {
-			f_windGust = responsef.value;
-		}*/
 			
 
 		undef_flag = true;
@@ -424,61 +340,6 @@ namespace WeatherStation {
 				f_windDirection = responseg.value;
 			}
 		}
-
-		/*std::cout << "Input the Visibility in KM: ";
-		
-		std::getline(std::cin, temp);
-		inputValidatorResponse<float> responseh = floatInputHandler(temp, "Visibility");
-		if (responseh.isQuit) {
-			return WeatherFrameResponse(true, false);
-		}
-		else if (responseh.isValid == 0) {
-			f_visibility = WeatherParam<float>("Visibility");
-		}
-		else if (responseh.isValid == 2) {
-			std::cout << "Your input was not understood. Setting as unavailiable." << std::endl;
-			f_visibility = WeatherParam<float>("Visibility");
-		}
-		else {
-			f_visibility = responseh.value;
-		}*/
-
-		/*std::cout << "Input the Humidity as a percentage (excluding percent sign): ";
-		
-		std::getline(std::cin, temp);
-		
-		inputValidatorResponse<Percentage> responsei = percentageInputHandler(temp, "Humidity");
-		if (responsei.isQuit) {
-			return WeatherFrameResponse(true, false);
-		}
-		else if (responsei.isValid == 0) {
-			f_humidity = WeatherParam<Percentage>("Humidity");
-		}
-		else if (responsei.isValid == 2) {
-			std::cout << "Your input was not understood. Setting as unavailiable." << std::endl;
-			f_humidity = WeatherParam<Percentage>("Humidity");
-		}
-		else {
-			f_humidity = responsei.value;
-		}*/
-
-		/*std::cout << "Input the Pressure in hPa: ";
-		
-		std::getline(std::cin, temp);
-		inputValidatorResponse<int> responsej = intInputHandler(temp, "Pressure");
-		if (responsej.isQuit) {
-			return WeatherFrameResponse(true, false);
-		}
-		else if (responsej.isValid == 0) {
-			f_pressure = WeatherParam<int>("Pressure");
-		}
-		else if (responsej.isValid == 2) {
-			std::cout << "Your input was not understood. Setting as unavailiable." << std::endl;
-			f_pressure = WeatherParam<int>("Pressure");
-		}
-		else {
-			f_pressure = responsej.value;
-		}*/
 #pragma endregion
 
 		//This array is a temporary measure for outputting the name corresponding to the wind dir enum
@@ -489,11 +350,7 @@ namespace WeatherStation {
 		std::cout << "Is the following data correct?\n" << std::endl;
 		std::cout << f_name << "\n";
 		std::cout << f_temperature << " " << tempUnit << "\n";
-		//std::cout << f_feelsLikeTemperature << " " << tempUnit << "\n";
-		//std::cout << f_heatIndex << " " << tempUnit << "\n";
-		//std::cout << f_dewPoint << " " << tempUnit << "\n";
 		std::cout << f_windSpeed << " " << windUnit << "\n";
-		//std::cout << f_windGust << " " << windUnit << "\n";
 		std::cout << "Wind Direction = ";
 		//temporary workaround for enum issue.
 		if(f_windDirection.value >= 0 && f_windDirection.value < 16) {
@@ -502,9 +359,6 @@ namespace WeatherStation {
 		else {
 			std::cout << "Unavailiable\n";
 		}
-		//std::cout << f_visibility << " " << distUnit << "\n";
-		//std::cout << f_humidity << "\n";
-		//std::cout << f_pressure << " " << pressUnit << "\n";
 
 		std::cout << "Is the data correct? (Y/N): ";
 		
@@ -513,8 +367,6 @@ namespace WeatherStation {
 		while (yn != 0 || yn != 1) {
 			yn = yesNoCheck(temp);
 			if (yn == 1) {
-				//return WeatherFrameResponse(WeatherFrame(f_name, f_temperature, f_feelsLikeTemperature, f_heatIndex, f_dewPoint,
-					//f_windSpeed, f_windGust, f_windDirection, f_visibility, f_humidity, f_pressure));
 				return WeatherFrameResponse(WeatherFrame(f_name, f_temperature, f_windSpeed, f_windDirection));
 			}
 			else if (yn == 0) {
