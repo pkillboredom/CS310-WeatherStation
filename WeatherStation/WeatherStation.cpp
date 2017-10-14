@@ -1,8 +1,11 @@
 // WeatherStation.cpp : Defines the entry point for the console application.
 //Author Luke Tomkus
 
+#pragma once
+
 #include "stdafx.h"
 #include "ManualFrameEntryModule.h"
+#include "WeatherFrame.h"
 
 using namespace std;
 const bool manualInputMode = true;
@@ -97,3 +100,7 @@ static int yesNoCheck(string input) {
 		return 2;
 	}
 }
+
+class WeatherHistoryManager {
+	private WeatherFrame 
+};
