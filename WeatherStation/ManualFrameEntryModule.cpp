@@ -16,9 +16,9 @@ namespace WeatherStation {
 			std::cout << "debug_floatquit\n";
 			return inputValidatorResponse<std::string>(true); //only quit signal
 		}
-		if (s_input == "n/a") {
-			return inputValidatorResponse<std::string>(false, false, WeatherParam<std::string>("Unavailiable", false, name)); //invalid signal
-		}
+		//if (s_input == "n/a") {
+		//	return inputValidatorResponse<std::string>(false, false, WeatherParam<std::string>("Unavailiable", false, name)); //invalid signal
+		//}
 		else {
 			if (s_input == "") {
 				return inputValidatorResponse<std::string>(false, 2, WeatherParam<std::string>(name));
@@ -34,9 +34,9 @@ namespace WeatherStation {
 			std::cout << "debug_floatquit\n";
 			return inputValidatorResponse<float>(true); //only quit signal
 		}
-		if (s_input == "n/a") {
-			return inputValidatorResponse<float>(false, false, WeatherParam<float>(0, false, name)); //invalid signal
-		}
+		//if (s_input == "n/a") {
+		//	return inputValidatorResponse<float>(false, false, WeatherParam<float>(0, false, name)); //invalid signal
+		//}
 		else {
 			float f_out;
 			try {
@@ -54,9 +54,9 @@ namespace WeatherStation {
 		if (s_input == "cancel" || s_input == "quit" || s_input == "q") {
 			return inputValidatorResponse<WindDirections>(true); //only quit signal
 		}
-		if (s_input == "n/a") {
-			return inputValidatorResponse<WindDirections>(false, false); //std::invalid signal
-		}
+		//if (s_input == "n/a") {
+		//	return inputValidatorResponse<WindDirections>(false, false); //std::invalid signal
+		//}
 		else { //obviously this is gross, but we only use it for manual input checking, not internal generation.
 			if (s_input == "n" || s_input == "N") {
 				return inputValidatorResponse<WindDirections>(false, 1, WeatherParam<WindDirections>(N, name));
@@ -116,9 +116,9 @@ namespace WeatherStation {
 		if (s_input == "cancel" || s_input == "quit" || s_input == "q") {
 			return inputValidatorResponse<Percentage>(true); //only quit signal
 		}
-		if (s_input == "n/a") {
-			return inputValidatorResponse<Percentage>(false, false); //std::invalid signal
-		}
+		//if (s_input == "n/a") {
+		//	return inputValidatorResponse<Percentage>(false, false); //std::invalid signal
+		//}
 		else {
 			int val = 0;
 			try {
@@ -140,9 +140,9 @@ namespace WeatherStation {
 		if (s_input == "cancel" || s_input == "quit" || s_input == "q") {
 			return inputValidatorResponse<int>(true); //only quit signal
 		}
-		if (s_input == "n/a") {
-			return inputValidatorResponse<int>(false, false); //std::invalid signal
-		}
+		//if (s_input == "n/a") {
+		//	return inputValidatorResponse<int>(false, false); //std::invalid signal
+		//}
 		else {
 			int f_out;
 			try {
@@ -167,7 +167,7 @@ namespace WeatherStation {
 		}
 	}
 
-	WeatherFrameResponse InputPrompt() {
+	WeatherFrameResponse InputPrompt(std::string stationName) {
 
 		///take in std::strings so that the professor cant throw exceptions on bad inputs
 		std::string s_name;
@@ -194,41 +194,10 @@ namespace WeatherStation {
 		std::cout << "\nManual Weather Frame Generation" << std::endl;
 #pragma region Data Inputs
 
-		while (undef_flag) {
-			std::cout << "Input the name of the weather station: ";
-			std::getline(std::cin, temp);
-			WeatherStation::Structs::inputValidatorResponse<std::string> responsez = stringInputHandler(temp, "Station Name");
-			//std::cout << "\ndebug_resa params: isQuit: " << responsea.isQuit << " isvalid: " << responsea.isValid << " val: " << responsea.value << " " << std::endl;
-			if (responsez.isQuit) {
-				//std::cout << "debug_resa isQuit\n";
-				return WeatherFrameResponse(true, false);
-			}
-			else if (responsez.isValid == 0) {
-				undef_flag = false;
-				f_name = WeatherParam<std::string>("Station Name");
-			}
-			else if (responsez.isValid == 2) {
-				std::cout << "Your input was not understood. Do you want to leave it undefined?\nY/N: ";
-				temp = "";
-				std::getline(std::cin, temp);
-				int yn = yesNoCheck(temp);
-				if (yn == 1) {
-					undef_flag = false;
-					f_name = WeatherParam<std::string>("Station Name");
-				}
-				else if (yn == 0) {
-					undef_flag = true;
-				}
-				else {
-					undef_flag = true;
-					std::cout << "Didn't understand, assuming N..." << std::endl;
-				}
-			}
-			else {
-				undef_flag = false;
-				f_name = responsez.value;
-			}
-		}
+		//use name passed from main menu
+		f_name = WeatherParam<std::string>(stationName, "Station Name");
+
+
 		undef_flag = true;
 		while (undef_flag) {
 			std::cout << "Input the Temperature in Degrees Celcius: ";
@@ -244,21 +213,8 @@ namespace WeatherStation {
 				f_temperature = WeatherParam<float>("Temperature");
 			}
 			else if (responsea.isValid == 2) {
-				std::cout << "Your input was not understood. Do you want to leave it undefined?\nY/N: ";
-				temp = "";
-				std::getline(std::cin, temp);
-				int yn = yesNoCheck(temp);
-				if (yn == 1) {
-					undef_flag = false;
-					f_temperature = WeatherParam<float>("Temperature");
-				}
-				else if (yn == 0) {
-					undef_flag = true;
-				}
-				else {
-					undef_flag = true;
-					std::cout << "Didn't understand, assuming N..." << std::endl;
-				}
+				std::cout << "Your input was not understood. Asking again... ";
+				undef_flag = true;
 			}
 			else {
 				undef_flag = false;
@@ -273,6 +229,12 @@ namespace WeatherStation {
 
 			std::getline(std::cin, temp);
 			inputValidatorResponse<float> responsee = floatInputHandler(temp, "Wind Speed");
+
+			//prevent negative wind speed
+			if (responsee.value.value < 0) {
+				responsee.isValid = 2;
+			}
+
 			if (responsee.isQuit) {
 				return WeatherFrameResponse(true, false);
 			}
@@ -281,21 +243,8 @@ namespace WeatherStation {
 				f_windSpeed = WeatherParam<float>("Wind Speed");
 			}
 			else if (responsee.isValid == 2) {
-				std::cout << "Your input was not understood. Do you want to leave it undefined?\nY/N: ";
-				temp = "";
-				std::getline(std::cin, temp);
-				int yn = yesNoCheck(temp);
-				if (yn == 1) {
-					undef_flag = false;
-					f_windSpeed = WeatherParam<float>("Wind Speed");
-				}
-				else if (yn == 0) {
-					undef_flag = true;
-				}
-				else {
-					undef_flag = true;
-					std::cout << "Didn't understand, assuming N..." << std::endl;
-				}
+				std::cout << "Your input was not understood. Asking again... ";
+				undef_flag = true;
 			}
 			else {
 				undef_flag = false;
@@ -319,21 +268,8 @@ namespace WeatherStation {
 				f_windDirection = WeatherParam<WindDirections>("Wind Direction");
 			}
 			else if (responseg.isValid == 2) {
-				std::cout << "Your input was not understood. Do you want to leave it undefined?\nY/N: ";
-				temp = "";
-				std::getline(std::cin, temp);
-				int yn = yesNoCheck(temp);
-				if (yn == 1) {
-					undef_flag = false;
-					f_windDirection = WeatherParam<WindDirections>("Wind Direction");
-				}
-				else if (yn == 0) {
-					undef_flag = true;
-				}
-				else {
-					undef_flag = true;
-					std::cout << "Didn't understand, assuming N..." << std::endl;
-				}
+				std::cout << "Your input was not understood. Asking again... ";
+				undef_flag = true;
 			}
 			else {
 				undef_flag = false;

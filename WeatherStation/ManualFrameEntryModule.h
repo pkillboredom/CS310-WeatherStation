@@ -4,5 +4,5 @@
 #include "WeatherFrameResponse.h"
 
 namespace WeatherStation {
-	WeatherStation::Structs::WeatherFrameResponse InputPrompt();
+	WeatherStation::Structs::WeatherFrameResponse InputPrompt(std::string stationName);
 }
