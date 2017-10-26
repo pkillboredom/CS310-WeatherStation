@@ -32,12 +32,13 @@ int main()
 
 	bool menumode = false;
 	bool namemode = true;
+	bool historymode = true;
 	bool menuQuit = false;
 	WeatherStation::Structs::WeatherFrame lastFrame;
 	bool frameEntered = false;
 	string stationname;
-
-	WeatherHistoryManager historyManager = WeatherHistoryManager();
+	int histlen = 1;
+	WeatherHistoryManager historyManager(1);
 
 	while (!menuQuit) {
 
@@ -55,7 +56,7 @@ int main()
 				yn = yesNoCheck(tempb);
 				if (yn == 1) {
 					stationname = tempa;
-					menumode = true;
+					menumode = false;
 					namemode = false;
 					break;
 				}
@@ -71,7 +72,56 @@ int main()
 			}
 		}
 
+		if (historymode) {
+			cout << "How long would you like the history to be? (Max 65,535, Min 1)\nHistory Size: ";
+			string temph;
+			getline(cin, temph);
+			try {
+				int tempHistLen = stoi(temph);
+				if (tempHistLen < 1 || tempHistLen > 65535) {
+					cout << "That was not a valid entry." << endl;
+					historymode = true;
+					menumode = false;
+				}
+				else {
+					cout << "Is \'" << tempHistLen << "\' the size you want? (This will use " << tempHistLen*sizeof(WeatherStation::Structs::WeatherFrame) << " bytes) Y/N: ";
+					string tempb;
+
+					int yn = 2;
+					while (yn != 0 || yn != 1) {
+						getline(std::cin, tempb);
+						yn = yesNoCheck(tempb);
+						if (yn == 1) {
+							histlen = tempHistLen;
+							historymode = false;
+							menumode = true;
+							break;
+						}
+						else if (yn == 0) {
+							historymode = true;
+							menumode = false;
+							break;
+						}
+						else {
+							std::cout << "That was not a valid entry." << std::endl;
+							std::cout << "Is the History Size correct? (Y/N): ";
+						}
+					}
+				}
+			}
+			catch (std::exception e) {
+				cout << "That was not a valid entry." << endl;
+				historymode = true;
+				menumode = false;
+			}
+			if (!historymode) {
+				historyManager = WeatherHistoryManager(histlen);
+			}
+		}
+
+
 		if (menumode) {
+
 			cout << "Directory " << endl;
 			cout << "------------------------------" << endl;
 			cout << "0. Quit" << endl;

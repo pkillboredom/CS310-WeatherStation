@@ -155,6 +155,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="WeatherFrameResponse.h" />
     <ClInclude Include="WeatherHistoryManager.h" />
+    <ClInclude Include="WeatherStation.h" />
     <ClInclude Include="WindDirections.h" />
   </ItemGroup>
   <ItemGroup>
