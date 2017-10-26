@@ -11,7 +11,7 @@ std::string windDirectionArr[] = { "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "S
 WeatherHistoryManager::WeatherHistoryManager(int size)
 {
 	stackPointer = -1;
-	weatherFrameArray = new WeatherStation::Structs::WeatherFrame*[size];
+	weatherFrameArray = new WeatherStation::Structs::WeatherFrame[size];
 	historySize = size;
 }
 
@@ -23,15 +23,21 @@ void WeatherHistoryManager::addNewFrame(WeatherStation::Structs::WeatherFrame ne
 	}
 	//refers to stackPointer + 1 as the pointer points to the last *filled* slot, not the unfilled slot.
 	else if ((stackPointer + 1) == historySize) {
-		WeatherStation::Structs::WeatherFrame** tempArray = new WeatherStation::Structs::WeatherFrame*[historySize];
+		//special case for size 1
+		if (historySize == 1) {
+			weatherFrameArray[0] = newWeatherFrame;
+		}
+		else{
+		WeatherStation::Structs::WeatherFrame* tempArray = new WeatherStation::Structs::WeatherFrame[historySize];
 		for (int i = 1; i < (stackPointer + 1); i++) {
 			tempArray[i - 1] = weatherFrameArray[i];
 		}
-		tempArray[stackPointer] = &newWeatherFrame;
+		tempArray[stackPointer] = newWeatherFrame;
 		weatherFrameArray = tempArray;
+		}
 	}
 	else if ((stackPointer + 1) < historySize) {
-		weatherFrameArray[stackPointer + 1] = &newWeatherFrame;
+		weatherFrameArray[stackPointer + 1] = newWeatherFrame;
 		stackPointer++;
 	}
 	else {
@@ -41,15 +47,7 @@ void WeatherHistoryManager::addNewFrame(WeatherStation::Structs::WeatherFrame ne
 
 std::string WeatherHistoryManager::getNewestFrame() {
 	std::ostringstream stream;
-	stream << "Temperature = " << (weatherFrameArray[stackPointer]->Temperature.value) << "\nWind Speed = " << (weatherFrameArray[stackPointer]->WindSpeed.value) << "\nWind Direction = ";
-	int windval = weatherFrameArray[stackPointer]->WindDirection.value;
-	if (windval >= 0 && windval < 16) {
-		stream << windDirectionArr[windval] << "\n";
-	}
-	else {
-		stream << "Unavailiable\n";
-	}
-	stream << std::endl;
+	stream << weatherFrameArray[stackPointer];
 	return stream.str();
 }
 
@@ -57,16 +55,7 @@ std::string WeatherHistoryManager::getCompleteHistory() {
 	std::ostringstream stream;
 	stream << "\nThe weather history in order from newest to oldest frames:";
 	for (int i = stackPointer; i >= 0; i--) {
-		stream << "\n\nFrame Index " << i << ":\n";
-		stream << "Temperature = " << (weatherFrameArray[i]->Temperature.value) << "\nWind Speed = " << (weatherFrameArray[i]->WindSpeed.value) << "\nWind Direction = ";
-		int windval = weatherFrameArray[i]->WindDirection.value;
-		if (windval >= 0 && windval < 16) {
-			stream << windDirectionArr[windval] << "\n";
-		}
-		else {
-			stream << "Unavailiable\n";
-		}
-		stream << std::endl;
+		stream << "\n\nFrame Index " << i << ":\n" << weatherFrameArray[i];
 	}
 	return stream.str();
 }

@@ -3,7 +3,7 @@
 class WeatherHistoryManager
 {
 public:
-	WeatherStation::Structs::WeatherFrame** weatherFrameArray;
+	WeatherStation::Structs::WeatherFrame* weatherFrameArray;
 	int stackPointer;
 	int historySize;
 
