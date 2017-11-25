@@ -3,13 +3,13 @@
 class WeatherHistoryManager
 {
 public:
-	WeatherStation::Structs::WeatherFrame* weatherFrameArray;
+	WeatherStation::Structs::WeatherMeasurement* WeatherMeasurementArray;
 	int stackPointer;
 	int historySize;
 
 	WeatherHistoryManager(int size);
 	std::string getNewestFrame();
-	void addNewFrame(WeatherStation::Structs::WeatherFrame newWeatherFrame);
+	void addNewFrame(WeatherStation::Structs::WeatherMeasurement newWeatherMeasurement);
 	std::string getCompleteHistory();
 	int getHistoryPointer();
 	int getHistorySize();

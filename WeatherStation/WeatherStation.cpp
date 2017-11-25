@@ -5,7 +5,7 @@
 
 #include "stdafx.h"
 #include "ManualFrameEntryModule.h"
-#include "WeatherFrame.h"
+#include "WeatherMeasurement.h"
 #include "WeatherHistoryManager.h"
 #include <stack>
 
@@ -34,7 +34,7 @@ int main()
 	bool namemode = true;
 	bool historymode = true;
 	bool menuQuit = false;
-	WeatherStation::Structs::WeatherFrame lastFrame;
+	WeatherStation::Structs::WeatherMeasurement lastFrame;
 	bool frameEntered = false;
 	string stationname;
 	int histlen = 1;
@@ -84,7 +84,7 @@ int main()
 					menumode = false;
 				}
 				else {
-					cout << "Is \'" << tempHistLen << "\' the size you want? (This will use " << tempHistLen*sizeof(WeatherStation::Structs::WeatherFrame) << " bytes) Y/N: ";
+					cout << "Is \'" << tempHistLen << "\' the size you want? (This will use " << tempHistLen*sizeof(WeatherStation::Structs::WeatherMeasurement) << " bytes) Y/N: ";
 					string tempb;
 
 					int yn = 2;
@@ -150,7 +150,7 @@ int main()
 					case 1: {
 						//manual frame case
 						validEntry = true;
-						WeatherStation::Structs::WeatherFrameResponse res;
+						WeatherStation::Structs::WeatherMeasurementResponse res;
 						if (historyManager.getHistoryPointer() + 1 >= historyManager.getHistorySize()) {
 							cout << "This will delete the oldest entry." << endl;
 						}
@@ -167,7 +167,7 @@ int main()
 						}
 						else {
 							cout << std::endl;
-							historyManager.addNewFrame(res.weatherFrame);
+							historyManager.addNewFrame(res.weatherMeasurement);
 							frameEntered = true;
 						}
 						break;

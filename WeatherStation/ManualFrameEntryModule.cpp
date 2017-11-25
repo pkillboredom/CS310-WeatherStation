@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include <string>
 #include "inputValidatorResponse.h"
-#include "WeatherFrameResponse.h"
+#include "WeatherMeasurementResponse.h"
 #include "ManualFrameEntryModule.h"
 
 using namespace WeatherStation;
@@ -167,7 +167,7 @@ namespace WeatherStation {
 		}
 	}
 
-	WeatherFrameResponse InputPrompt(std::string stationName) {
+	WeatherMeasurementResponse InputPrompt(std::string stationName) {
 
 		///take in std::strings so that the professor cant throw exceptions on bad inputs
 		std::string s_name;
@@ -206,7 +206,7 @@ namespace WeatherStation {
 			//std::cout << "\ndebug_resa params: isQuit: " << responsea.isQuit << " isvalid: " << responsea.isValid << " val: " << responsea.value << " " << std::endl;
 			if (responsea.isQuit) {
 				//std::cout << "debug_resa isQuit\n";
-				return WeatherFrameResponse(true, false);
+				return WeatherMeasurementResponse(true, false);
 			}
 			else if (responsea.isValid == 0) {
 				undef_flag = false;
@@ -236,7 +236,7 @@ namespace WeatherStation {
 			}
 
 			if (responsee.isQuit) {
-				return WeatherFrameResponse(true, false);
+				return WeatherMeasurementResponse(true, false);
 			}
 			else if (responsee.isValid == 0) {
 				undef_flag = false;
@@ -262,7 +262,7 @@ namespace WeatherStation {
 			std::getline(std::cin, temp);
 			inputValidatorResponse<WindDirections> responseg = windDirectionInputHandler(temp, "Wind Direction");
 			if (responseg.isQuit) {
-				return WeatherFrameResponse(true, false);
+				return WeatherMeasurementResponse(true, false);
 			}
 			else if (responseg.isValid == 0) {
 				f_windDirection = WeatherParam<WindDirections>("Wind Direction");
@@ -303,10 +303,10 @@ namespace WeatherStation {
 		while (yn != 0 || yn != 1) {
 			yn = yesNoCheck(temp);
 			if (yn == 1) {
-				return WeatherFrameResponse(WeatherFrame(f_name, f_temperature, f_windSpeed, f_windDirection));
+				return WeatherMeasurementResponse(WeatherMeasurement(f_name, f_temperature, f_windSpeed, f_windDirection));
 			}
 			else if (yn == 0) {
-				return WeatherFrameResponse(false, true);
+				return WeatherMeasurementResponse(false, true);
 			}
 			else {
 				std::cout << "That was not a valid entry." << std::endl;

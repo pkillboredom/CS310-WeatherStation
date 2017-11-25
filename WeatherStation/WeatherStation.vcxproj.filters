@@ -33,12 +33,6 @@
     <ClInclude Include="Percentage.h">
       <Filter>Header Files\Structs</Filter>
     </ClInclude>
-    <ClInclude Include="WeatherFrame.h">
-      <Filter>Header Files\Structs</Filter>
-    </ClInclude>
-    <ClInclude Include="WeatherFrameResponse.h">
-      <Filter>Header Files\Structs</Filter>
-    </ClInclude>
     <ClInclude Include="ManualFrameEntryModule.h">
       <Filter>Header Files\Structs</Filter>
     </ClInclude>
@@ -54,6 +48,18 @@
     <ClInclude Include="WeatherStation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Temperature.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="Wind.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="WeatherMeasurement.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="WeatherMeasurementResponse.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -67,6 +73,9 @@
     </ClCompile>
     <ClCompile Include="WeatherHistoryManager.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Temperature.cpp">
+      <Filter>Source Files\Structs</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

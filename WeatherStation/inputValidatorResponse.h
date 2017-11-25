@@ -1,7 +1,7 @@
 //Author Luke Tomkus
 
 #pragma once
-#include "WeatherFrame.h"
+#include "WeatherMeasurement.h"
 
 namespace WeatherStation::Structs {
 	template <typename t>

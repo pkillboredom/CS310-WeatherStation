@@ -11,7 +11,7 @@
 #include <tchar.h>
 #include <iostream>
 #include <string>
-#include "WeatherFrame.h"
+#include "WeatherMeasurement.h"
 
 
 

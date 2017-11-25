@@ -1,8 +1,8 @@
 //Author Luke Tomkus
 
 #pragma once
-#include "WeatherFrameResponse.h"
+#include "WeatherMeasurementResponse.h"
 
 namespace WeatherStation {
-	WeatherStation::Structs::WeatherFrameResponse InputPrompt(std::string stationName);
+	WeatherStation::Structs::WeatherMeasurementResponse InputPrompt(std::string stationName);
 }
