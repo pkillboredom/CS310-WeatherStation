@@ -11,7 +11,8 @@
 namespace WeatherStation::Structs {
 
 	template <typename t>
-	struct WeatherParam {
+	class WeatherParam {
+	public:
 		t value;
 		bool isAvailiable;
 		std::string name;
@@ -44,8 +45,10 @@ namespace WeatherStation::Structs {
 		}
 	};
 
-	typedef struct WeatherMeasurement
+	class WeatherMeasurement
 	{
+	public:
+
 		WeatherParam<std::string> Name;
 
 		//Expressed in Celcius

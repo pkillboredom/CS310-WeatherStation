@@ -77,5 +77,11 @@
     <ClCompile Include="Temperature.cpp">
       <Filter>Source Files\Structs</Filter>
     </ClCompile>
+    <ClCompile Include="Wind.cpp">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="WeatherMeasurement.cpp">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
